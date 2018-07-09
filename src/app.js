@@ -1,6 +1,15 @@
 import React from 'react'
 import JakeTheDog from '../assets/jake.png'
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import Header from './components/header'
+import IndexPage from './pages/index'
+import NewPosting from './pages/newPosting'
+import PostingPage from './pages/posting'
+import storeFactory from './store'
+import initialState from './store/initial-state.json'
+
+window.store = storeFactory(initialState)
 
 const Home = () => (
   <div>
@@ -18,56 +27,23 @@ const Category = () => (
 class App extends React.Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      isJakeVisible: false
-    }
-
-    this.showJake = this.showJake.bind(this)
-    this.hideJake = this.hideJake.bind(this)
-  }
-
-  showJake() {
-    this.setState({
-      isJakeVisible: true
-    })
-  }
-
-  hideJake() {
-    this.setState({
-      isJakeVisible: false
-    })
   }
 
   render() {
-    const showJakeComponent = () => {
-      if (this.state.isJakeVisible) {
-        return (
-          <img src={JakeTheDog} onClick={this.hideJake}></img>
-        )
-      } else {
-        return (
-          <button onClick={this.showJake}>Show Jake</button>
-        )
-      }
-    }
-
     return (
-      <div>
-        <nav className="navbar navbar-light">
-          <ul className="nav navbar-nav">
-            <li><Link to="/">Homes</Link></li>
-            <li><Link to="/category">Category</Link></li>
-          </ul>
-        </nav>
-
-        <Route exact={true} path="/" component={Home} />
-        <Route path="/category" component={Category} />
-        <h1 className="tomato-color">
-          {this.props.title}
-        </h1>
-        {showJakeComponent()}
-      </div>
+      <Provider store={store}>
+        <div>
+          <h1>
+            {this.props.title}
+          </h1>
+          <Header />
+          <div>
+            <Route exact={true} path="/" component={IndexPage} />
+            <Route path="/new-posting" component={NewPosting} />
+            <Route path="/posting" component={PostingPage} />
+          </div>
+        </div>
+      </Provider>
     )
   }
 }
