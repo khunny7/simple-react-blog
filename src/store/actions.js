@@ -41,3 +41,17 @@ export const setCurrentPosting = (posting) => (dispatch, getState) => {
     payload: posting,
   })
 }
+
+export const setPostings = (postings) => {
+  return {
+    type: C.setPostings,
+    payload: postings,
+  }
+}
+
+export const setPostingListViewState = (payload) => {
+  return {
+    type: C.setPostingListViewState,
+    payload,
+  }
+}

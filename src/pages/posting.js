@@ -9,7 +9,6 @@ import {
   EditorState,
   convertFromRaw,
 } from 'draft-js'
-import 'react-block-ui/style.css';
 
 class PostingPage extends React.Component {
   constructor(props) {
@@ -57,16 +56,14 @@ class PostingPage extends React.Component {
 
     return (
       <BlockUi tag="div" blocking={this.props.isLoading}>
-        <Grid>
-          <Row>
-            <h3>
-              {this.props.title}
-            </h3>
-          </Row>
-          <Row>
-            {content}
-          </Row>
-        </Grid>
+        <Row>
+          <h3>
+            {this.props.title}
+          </h3>
+        </Row>
+        <Row>
+          {content}
+        </Row>
       </BlockUi>
     )
   }

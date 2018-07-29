@@ -11,8 +11,8 @@ export default class PostPreview extends React.Component {
     const content = this.props.content;
 
     return (
-      <Grid>
-        <Row>
+      <div>
+        <div>
           <h3
             style={{
               marginBottom: '15px',
@@ -36,16 +36,12 @@ export default class PostPreview extends React.Component {
               {title}
             </Link>
           </h3>
-        </Row>
-        <Row>
+        </div>
+        <div>
           <small>{date}</small>
-        </Row>
-        <Row>
-          <p>
-            {content}
-          </p>
-        </Row>
-      </Grid>
+        </div>
+        <div> {content} </div>
+      </div>
     )
   }
 }

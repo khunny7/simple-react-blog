@@ -6,10 +6,8 @@
     },
     "isLoading": false
   },
-  "postings": [{
-    "title": "Heeya Heeya",
-    "date": "2015-05-01T22:12:03.284Z",
-    "content": "{\"blocks\":[{\"key\":\"cbm59\",\"text\":\"Once upon a time, there was a beautiful princess named HEeya Heeya. She was kind and gentle and a friend to all animals.\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"2ac6t\",\"text\":\"Heeya i love you!\",\"type\":\"header-two\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-    "id": "123456"
-  }]
+  "postings": [],
+  "postingListView": {
+    "isLoading": false
+  }
 }

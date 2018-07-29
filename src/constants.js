@@ -4,8 +4,10 @@ const constants = {
   addError: "addError",
   clearError: "clearError",
   setCurrentPosting: "setCurrentPosting",
+  setPostings: "setPostings",
   setPostingViewPosting: "setPostingViewPosting",
-  setPostingViewIsLoading: "setPostingViewIsLoading"
+  setPostingViewIsLoading: "setPostingViewIsLoading",
+  setPostingListViewState: "setPostingListViewState"
 }
 
 export default constants

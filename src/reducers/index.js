@@ -31,8 +31,26 @@ export const postings = (state = [], action) => {
     })
 
     return newState
+  } else if (action.type === C.setPostings) {
+    return action.payload
   } else {
     return state
+  }
+}
+
+export const postingListView = (state = {}, action) => {
+  switch (action.type) {
+    case C.setPostingListViewState:
+      const newState = {
+        isLoading: action.payload.hasOwnProperty('isLoading') ? action.payload.isLoading : state.isLoading,
+        pageNumber: action.payload.hasOwnProperty('pageNumber') ? action.payload.pageNumber : state.pageNumber,
+        hasMore: action.payload.hasOwnProperty('hasMore') ? action.payload.hasMore : state.hasMore,
+      }
+
+      return newState;
+
+    default:
+      return state;
   }
 }
 
@@ -73,6 +91,7 @@ export const currentPosting = (state = null, action) => {
 export default combineReducers({
   // posting,
   postings,
+  postingListView,
   currentPosting,
   postingView
 })

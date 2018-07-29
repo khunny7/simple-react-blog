@@ -6,16 +6,13 @@ const consoleMessages = store => next => action => {
   let result
 
   console.groupCollapsed(`dispatching action => ${action.type}`)
-  console.log('postings', store.getState().postings.length)
+  console.log('before', JSON.stringify(store.getState()))
 
   result = next(action)
 
   let { postings, postingView } = store.getState()
 
-  console.log(`
-        postings: ${JSON.stringify(postings)}
-        postingView: ${JSON.stringify(postingView)}
-    `)
+  console.log('after', JSON.stringify(store.getState()))
 
   console.groupEnd()
 

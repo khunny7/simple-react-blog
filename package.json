@@ -34,14 +34,17 @@
     "bluebird": "^3.5.1",
     "bootstrap": "^4.1.1",
     "draft-js": "^0.10.5",
+    "httpinvoke": "^1.4.0",
     "react": "^16.4.1",
     "react-block-ui": "^1.1.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
+    "react-transition-group": "^2.4.0",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "underscore": "^1.9.1"
   },
   "keywords": [],
   "description": ""
