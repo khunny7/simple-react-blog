@@ -7,7 +7,7 @@ import {
 import PostPreview from '../post-preview'
 import { connect } from 'react-redux'
 import BlockUi from 'react-block-ui';
-import { getPostingListAsync } from '../../data/mock-data-source'
+import { getPostingListAsync, getNextPostingListAsync } from '../../data/firebase-data-repository'
 import { setPostings, setPostingListViewState } from '../../store/actions'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { callbackify } from 'util';
@@ -57,7 +57,10 @@ class PostingList extends React.Component {
     }));
 
     // TODO: set some loading icon
-    getPostingListAsync(this.props.pageNumber + 1).then(({ postings, hasMore }) => {
+    // Get the oldest timestamp shown
+    const lastTimestamp = this.props.postings[this.props.postings.length - 1].timestamp
+
+    getNextPostingListAsync(lastTimestamp).then(({ postings, hasMore }) => {
       store.dispatch(setPostings([
         ...this.props.postings,
         ...postings,
@@ -92,8 +95,8 @@ class PostingList extends React.Component {
     }));
     getPostingListAsync(this.props.pageNumber).then(({ postings, hasMore }) => {
       store.dispatch(setPostings([
-        ...this.props.postings,
         ...postings,
+        ...this.props.postings,
       ]));
       store.dispatch(setPostingListViewState({
         isLoading: false,
@@ -111,7 +114,7 @@ class PostingList extends React.Component {
           <TransitionGroup className="posting-list-transition-group">
             {_.map(this.props.postings, (posting) => {
               const title = posting.title
-              const date = posting.date
+              const timestamp = posting.timestamp
               const slug = posting.id
               const content = this._getPlainText(posting.content)
 
@@ -121,7 +124,7 @@ class PostingList extends React.Component {
                   timeout={2000}
                   classNames="fade">
                   <ListGroupItem>
-                    <PostPreview title={title} date={date} slug={slug} content={content} />
+                    <PostPreview title={title} timestamp={timestamp} slug={slug} content={content} />
                   </ListGroupItem>
                 </CSSTransition>
               )

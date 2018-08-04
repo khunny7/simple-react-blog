@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Row, Col } from 'react-bootstrap'
-import { getPostingAsync } from '../data/mock-data-source'
+import { getPostingAsync } from '../data/firebase-data-repository'
 import { connect } from 'react-redux'
 import { setPostingViewPosting } from '../store/actions'
 import BlockUi from 'react-block-ui';
@@ -18,7 +18,7 @@ class PostingPage extends React.Component {
 
     const tempCurrentPosting = {
       title: props.location.state.title,
-      date: props.location.state.date,
+      timestamp: props.location.state.timestamp,
       content: props.location.state.content
     }
 

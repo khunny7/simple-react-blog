@@ -88,10 +88,19 @@ export const currentPosting = (state = null, action) => {
   }
 }
 
+export const currentUser = (state = null, action) => {
+  if (action.type === C.setCurrentUser) {
+    return action.payload
+  } else {
+    return state
+  }
+}
+
 export default combineReducers({
   // posting,
   postings,
   postingListView,
   currentPosting,
-  postingView
+  postingView,
+  currentUser
 })

@@ -1,5 +1,5 @@
-import Promise from 'bluebird';
-import _ from 'underscore';
+import Promise from 'bluebird'
+import _ from 'underscore'
 
 const postings = {}
 

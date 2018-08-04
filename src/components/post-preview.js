@@ -7,7 +7,7 @@ export default class PostPreview extends React.Component {
     // const title = get(node, 'frontmatter.title') || node.fields.slug
     const title = this.props.title;
     const slug = this.props.slug;
-    const date = this.props.date;
+    const timestamp = this.props.timestamp;
     const content = this.props.content;
 
     return (
@@ -28,7 +28,7 @@ export default class PostPreview extends React.Component {
                 hash: slug,
                 state: {
                   title,
-                  date,
+                  timestamp,
                   content
                 }
               }}
@@ -38,7 +38,7 @@ export default class PostPreview extends React.Component {
           </h3>
         </div>
         <div>
-          <small>{date}</small>
+          <small>{timestamp}</small>
         </div>
         <div> {content} </div>
       </div>

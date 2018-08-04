@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import AuthView from '../auth'
 
 export default class Header extends React.Component {
   render() {
@@ -29,6 +30,7 @@ export default class Header extends React.Component {
         >
           New Postings
         </Link>
+        <AuthView />
       </div>
     )
   }

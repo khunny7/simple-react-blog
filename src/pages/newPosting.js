@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Row, ButtonToolbar, Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
-import { savePostingAsync } from '../data/mock-data-source'
+import { savePostingAsync } from '../data/firebase-data-repository'
 // import { addPosting } from '../store/actions'
 import Editor from '../components/editor'
 import BlockUi from 'react-block-ui';

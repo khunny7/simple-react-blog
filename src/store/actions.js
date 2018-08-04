@@ -55,3 +55,10 @@ export const setPostingListViewState = (payload) => {
     payload,
   }
 }
+
+export const setCurrentUser = (payload) => {
+  return {
+    type: C.setCurrentUser,
+    payload,
+  }
+}

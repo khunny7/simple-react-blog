@@ -7,7 +7,8 @@ const constants = {
   setPostings: "setPostings",
   setPostingViewPosting: "setPostingViewPosting",
   setPostingViewIsLoading: "setPostingViewIsLoading",
-  setPostingListViewState: "setPostingListViewState"
+  setPostingListViewState: "setPostingListViewState",
+  setCurrentUser: "setCurrentUser",
 }
 
 export default constants

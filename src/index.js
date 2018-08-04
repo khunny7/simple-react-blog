@@ -6,11 +6,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './app'
 import { BrowserRouter } from 'react-router-dom'
-import 'react-block-ui/style.css';
+import 'react-block-ui/style.css'
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App title="React Webpack boiler plate with Jake" />
-  </BrowserRouter>,
+  <div>
+    <BrowserRouter>
+      <App title="React Webpack boiler plate with Jake" />
+    </BrowserRouter>
+    <div id="firebaseui-auth-container" />
+  </div>,
   document.getElementById('app-react-root')
 )
