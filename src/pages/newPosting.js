@@ -11,6 +11,7 @@ class NewPostings extends React.Component {
     super(props);
     this.onSave = this.onSave.bind(this)
     this.onLoad = this.onLoad.bind(this)
+    this.onCancel = this.onCancel.bind(this)
     this.handleTitleChange = this.handleTitleChange.bind(this)
     this.getTitleInputValidationState = this.getTitleInputValidationState.bind(this)
     this.state = {
@@ -20,13 +21,16 @@ class NewPostings extends React.Component {
     this.isTitleDirty = false
   }
 
+  onCancel() {
+    this.props.history.push('/')
+  }
+
   onSave() {
     const savedData = this.editorRef.serialize()
     localStorage.setItem('draft', savedData)
     this.setState({ blocking: !this.state.blocking })
     savePostingAsync(this.state.titleString, savedData).then((savedPosting) => {
       this.setState({ blocking: !this.state.blocking })
-      // store.dispatch(addPosting(savedPosting))
       this.props.history.push('/')
     })
   }

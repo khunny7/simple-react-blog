@@ -1,7 +1,7 @@
 import React from 'react'
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import { Button } from 'react-bootstrap'
+import { Button, Image } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 class AuthView extends React.Component {
@@ -34,14 +34,24 @@ class AuthView extends React.Component {
       display: "none",
     }
 
+    const floatLeft = {
+      float: "left"
+    }
+
     if (this.props.currentUser) {
       return (
         <div>
-          <img src={this.props.currentUser.photoURL} />
-          <div>
+          <Image
+            width="60px"
+            height="60px"
+            style={floatLeft}
+            src={this.props.currentUser.photoURL}
+            circle
+          />
+          <div style={floatLeft}>
             {this.props.currentUser.displayName}
           </div>
-          <Button onClick={this.onSignOut}>Sign out</Button>
+          <Button onClick={this.onSignOut} style={floatLeft}>Sign out</Button>
         </div>
       )
     } else {

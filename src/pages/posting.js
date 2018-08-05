@@ -62,6 +62,20 @@ class PostingPage extends React.Component {
           </h3>
         </Row>
         <Row>
+          <span>
+            <a
+              href='javascript:void(0)'
+              onClick={this.onUserNameClicked}
+              id={this.props.authorUid}
+            >
+              {this.props.authorDisplayName}
+            </a>
+          </span>
+          <span>
+            <small>{(new Date(this.props.timestamp)).toLocaleString()}</small>
+          </span>
+        </Row>
+        <Row>
           {content}
         </Row>
       </BlockUi>
@@ -105,6 +119,9 @@ const mapStateToProps = (state) => {
 
   return {
     title: currentPosting.title,
+    timestamp: currentPosting.timestamp,
+    authorDisplayName: currentPosting.authorDisplayName,
+    authorUid: currentPosting.authorUid,
     editorState,
     contentString,
     isLoading: state.postingView.isLoading,

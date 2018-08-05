@@ -37,6 +37,7 @@
     "firebase": "^5.3.0",
     "firebaseui": "^3.2.0",
     "httpinvoke": "^1.4.0",
+    "radium": "^0.24.1",
     "react": "^16.4.1",
     "react-block-ui": "^1.1.1",
     "react-bootstrap": "^0.32.1",

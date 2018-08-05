@@ -81,6 +81,10 @@ const getPostingAsync = (postingId) => {
 }
 
 const savePostingAsync = (title, content) => {
+  if (_.isNull(store.getState().currentUser)) {
+    throw new Error("Current user is null")
+  }
+
   var database = firebase.database()
   var newPostKey = database.ref().child('posts').push().key
 
@@ -88,7 +92,9 @@ const savePostingAsync = (title, content) => {
     title,
     content,
     timestamp: firebase.database.ServerValue.TIMESTAMP,
-    id: newPostKey
+    id: newPostKey,
+    authorUid: store.getState().currentUser.uid,
+    authorDisplayName: store.getState().currentUser.displayName,
   }
 
   // Write the new post's data simultaneously in the posts list and the user's post list.

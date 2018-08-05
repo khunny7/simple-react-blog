@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap'
+import Radium from 'radium'
 import _ from 'lodash'
 import {
   convertFromRaw,
@@ -10,7 +10,17 @@ import BlockUi from 'react-block-ui';
 import { getPostingListAsync, getNextPostingListAsync } from '../../data/firebase-data-repository'
 import { setPostings, setPostingListViewState } from '../../store/actions'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import { callbackify } from 'util';
+
+const postingListStyle = {
+  base: {
+    backgroundColor: "#F5F5F5",
+    outline: "none",
+    borderRadius: "8px",
+    padding: "15px",
+    boxShadow: "0px 1px 2px 0px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15)",
+    minHeight: "1024px",
+  }
+}
 
 class PostingList extends React.Component {
   constructor(props) {
@@ -84,10 +94,6 @@ class PostingList extends React.Component {
     this.intersectionObserver.observe(bottomSentinel)
   }
 
-  componentWillUnmount() {
-
-  }
-
   loadPostingList() {
     // true for is loading empty list of postings
     store.dispatch(setPostingListViewState({
@@ -109,29 +115,36 @@ class PostingList extends React.Component {
   render() {
     return (
       <BlockUi tag="div" blocking={this.props.isLoading}>
-        <div className="top-sentinel" />
-        <ListGroup>
+        <div style={postingListStyle.base}>
+          <div className="top-sentinel" />
           <TransitionGroup className="posting-list-transition-group">
             {_.map(this.props.postings, (posting) => {
               const title = posting.title
               const timestamp = posting.timestamp
               const slug = posting.id
               const content = this._getPlainText(posting.content)
+              const authorUid = posting.authorUid
+              const authorDisplayName = posting.authorDisplayName
 
               return (
                 <CSSTransition
                   key={slug}
                   timeout={2000}
                   classNames="fade">
-                  <ListGroupItem>
-                    <PostPreview title={title} timestamp={timestamp} slug={slug} content={content} />
-                  </ListGroupItem>
+                  <PostPreview
+                    title={title}
+                    timestamp={timestamp}
+                    slug={slug}
+                    content={content}
+                    authorUid={authorUid}
+                    authorDisplayName={authorDisplayName}
+                  />
                 </CSSTransition>
               )
             })}
           </TransitionGroup>
-        </ListGroup>
-        <div className="bottom-sentinel" />
+          <div className="bottom-sentinel" />
+        </div>
       </BlockUi>
     )
   }
@@ -157,6 +170,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-const Container = connect(mapStateToProps)(PostingList)
+const StylizedPostingList = Radium(PostingList)
+
+const Container = connect(mapStateToProps)(StylizedPostingList)
 
 export default Container

@@ -1,5 +1,4 @@
 import React from 'react'
-import JakeTheDog from '../assets/jake.png'
 import { Link, Route, Switch } from 'react-router-dom'
 import { Grid } from 'react-bootstrap'
 import { Provider } from 'react-redux'
@@ -11,6 +10,7 @@ import storeFactory from './store'
 import firebase from 'firebase/app'
 import 'firebase/database'
 import { setCurrentUser } from './store/actions'
+import { getUserAsync, saveUserAsync } from './data/firebase-user-repository'
 
 window.store = storeFactory()
 
@@ -27,12 +27,27 @@ window.firebaseApp = firebase.initializeApp(config)
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
-    store.dispatch(setCurrentUser({
-      displayName: user.displayName,
-      email: user.email,
-      photoURL: user.photoURL,
-      uid: user.uid,
-    }));
+    getUserAsync(user.uid).then((savedUser) => {
+      if (savedUser) {
+        store.dispatch(setCurrentUser({
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          uid: user.uid,
+        }));
+      } else {
+        saveUserAsync({
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL
+        }).catch((error) => {
+          console.error(error)
+        })
+      }
+    }).catch((error) => {
+      console.error(error)
+    })
   } else {
     store.dispatch(setCurrentUser(null))
   }
@@ -48,9 +63,6 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <div>
-          <h1>
-            {this.props.title}
-          </h1>
           <Header />
           <Grid>
             <Route exact={true} path="/" component={IndexPage} />
