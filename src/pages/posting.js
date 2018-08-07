@@ -5,10 +5,14 @@ import { connect } from 'react-redux'
 import { setPostingViewPosting } from '../store/actions'
 import BlockUi from 'react-block-ui';
 import {
-  Editor,
   EditorState,
   convertFromRaw,
 } from 'draft-js'
+import Editor from 'draft-js-plugins-editor';
+import createImagePlugin from 'draft-js-image-plugin'
+
+const imagePlugin = createImagePlugin()
+const plugins = [imagePlugin]
 
 class PostingPage extends React.Component {
   constructor(props) {
@@ -45,6 +49,7 @@ class PostingPage extends React.Component {
             isReadOnly="true"
             ref="editor"
             spellCheck={true}
+            plugins={plugins}
           />
         </div>
     } else {

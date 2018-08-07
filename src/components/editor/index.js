@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  Editor,
+  // Editor,
   EditorState,
   RichUtils,
   getDefaultKeyBinding,
@@ -8,9 +8,17 @@ import {
   convertFromRaw,
   convertToRaw
 } from 'draft-js'
+
+import 'draft-js-image-plugin/lib/plugin.css'
 import './rich-editor.css'
+import Editor, { composeDecorators } from 'draft-js-plugins-editor';
+import createImagePlugin from 'draft-js-image-plugin'
 import BlockStyleControls from './block-style-controls'
 import InlineStyleControls from './inline-style-control'
+import ImageAdd from './image-add'
+
+const imagePlugin = createImagePlugin()
+const plugins = [imagePlugin]
 
 class RichEditor extends React.Component {
   constructor(props) {
@@ -138,11 +146,17 @@ class RichEditor extends React.Component {
             handleKeyCommand={this.handleKeyCommand}
             keyBindingFn={this.mapKeyToEditorCommand}
             onChange={this.onChange}
+            plugins={plugins}
             placeholder="Tell a story..."
             ref="editor"
             spellCheck={true}
           />
         </div>
+        <ImageAdd
+          editorState={editorState}
+          onChange={this.onChange}
+          modifier={imagePlugin.addImage}
+        />
       </div>
     );
   }
